@@ -10,6 +10,7 @@
     "react-test-renderer": "^16.2.0",
     "spencer-kit-project-templates": "0.0.5"
   },
+  "license": "Apache 2.0",
   "dependencies": {
     "mlux": "^0.2.16",
     "prop-types": "^15.6.0",
