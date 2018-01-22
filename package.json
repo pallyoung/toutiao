@@ -1,0 +1,25 @@
+{
+  "name": "toutiao",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {},
+  "devDependencies": {
+    "babel-jest": "^22.1.0",
+    "babel-preset-react-native": "^4.0.0",
+    "jest": "^22.1.0",
+    "react-test-renderer": "^16.2.0",
+    "spencer-kit-project-templates": "0.0.5"
+  },
+  "dependencies": {
+    "mlux": "^0.2.16",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-native": "^0.52.0",
+    "react-native-alertui": "^1.0.0",
+    "react-native-awesome-viewpager": "^1.0.0",
+    "react-native-improver": "^0.1.0",
+    "react-native-modalui": "^1.0.2",
+    "react-native-storage-tool": "0.0.1",
+    "react-navigation": "^1.0.0-beta.26"
+  }
+}
