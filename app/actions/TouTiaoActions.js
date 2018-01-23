@@ -24,5 +24,3 @@ export default [
         }
     }
 ]
-/m.toutiao.com/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A1556AB6241667A&cp=5A649656774A3E1&min_behot_time=0
-m.toutiao.com/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A115EA963456C0F&cp=5A64364C10DF7E1&max_behot_time=1516520724
