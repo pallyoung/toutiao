@@ -54,8 +54,8 @@ function runActions(actions, payload, id) {
 function dispatch(key: string, payload: any) {
     try {
         var id = IDGenerator();
-        var actions = action.getActions(key);
-        runActions(actions, payload, id);
+        var action = action.getAction(key);
+        runAction(action, payload, id);
         return id;
     } catch (e) {
         //

@@ -1,8 +1,8 @@
 import createActions from './createActions';
-import getActions from './getActions';
+import getAction from './getActions';
 
 
 export default {
     createActions,
-    getActions
+    getAction
 }

@@ -7,14 +7,9 @@ class ActionVendor{
         }
     }
     putActionByKey(key:string,action){
-        var actions = this.getActionsForKey(key);
-        if(!actions){
-            actions = [];
-            this._actionsForKey[key] = actions;
-        }
-        actions.push(action);
+        this._actionsForKey[key] = action;
     }
-    getActionsForKey(key:string):?Array{
+    getActionForKey(key:string){
         return this._actionsForKey[key];
     }
 }

@@ -1,6 +1,6 @@
 import ActionVendor from './ActionVendor';
-function getActionsForKey(key:string){
-   return ActionVendor.getActionsForKey(key)
+function getActionForKey(key:string){
+   return ActionVendor.getActionForKey(key)
 }
 
-export default getActionsForKey;
+export default getActionForKey;
