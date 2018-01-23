@@ -1,3 +1,3 @@
 'use strict'
-import AppDispatcher from './AppDispatcher';
-export default AppDispatcher;
+import Dispatcher from './Dispatcher';
+export default Dispatcher;

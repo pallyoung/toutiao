@@ -2,6 +2,7 @@ import action from './action';
 import dispatcher from './dispatcher';
 import store from './store';
 import Observer from './Observer'
+import error from './error';
 
 module.exports =  {
     dispath:dispatcher.dispatch,
@@ -12,6 +13,7 @@ module.exports =  {
     setStorageTool:function(storageTool){
         return store.setStorageTool(storageTool);
     },
-    Observer
+    Observer,
+    onError:error.onError
 
 }

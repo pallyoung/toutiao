@@ -20,7 +20,6 @@ function createAction(config: actionConfig, controller) {
 }
 
 function createActions(config){
-    console.log(config)
     if(Array.isArray(config)){
         config.forEach(createAction);
     }else{

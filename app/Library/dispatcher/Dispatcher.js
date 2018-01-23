@@ -1,10 +1,13 @@
 'use strict'
 import Provider from './../provider';
 import Persist from './../persist';
-import action from './../action';
+import Action from './../action';
 import Observer from './../Observer';
+import error from './../error';
 
 import util from './../util';
+
+var errorHandle = error.handle;
 
 var id = 0;
 function IDGenerator() {
@@ -21,7 +24,7 @@ function getArgumentList(func): Array {
          * todo:可能有bug
          */
         let args = [];
-        RegExp.$1.split(',').forEach((arg)=>{
+        RegExp.$1.split(',').forEach((arg) => {
             args.push(arg.replace(/\s/g, ''));
         })
         return args;
@@ -36,17 +39,11 @@ function checkArguments(argumentsLength, providerLength, payload) {
         return argumentsLength === providerLength;
     }
 }
-function runActions(actions, payload, id) {
-    if (actions) {
-        actions.forEach(function (action) {
-            setTimeout(() => {
-                try {
-                    exec(action, payload, id)
-                } catch (e) {
-                    console.log(e)
-                }
-            }, 0)
-        });
+function runAction(action, payload, id) {
+    try {
+        exec(action, payload, id)
+    } catch (e) {
+        errorHandle(e);
     }
 
 }
@@ -54,7 +51,7 @@ function runActions(actions, payload, id) {
 function dispatch(key: string, payload: any) {
     try {
         var id = IDGenerator();
-        var action = action.getAction(key);
+        var action = Action.getAction(key);
         runAction(action, payload, id);
         return id;
     } catch (e) {
@@ -80,7 +77,7 @@ function exec(action, payload, id) {
     //         providerList.push(expression);
     //     }
     // })
-    providerList = Provider.provide(argumentList,payload);
+    providerList = Provider.provide(argumentList, payload);
     if (providerList) {
         args = args.concat(providerList);
     }
@@ -114,9 +111,26 @@ function complete(state, action, id) {
     }
     Observer.next(result);
 }
+var _errorHandler = function(error){
+    if(!_userErrorHandler(error)){
+        defaultErrorHandler(error);
+    }
+};
+//默认error处理
+function defaultErrorHandler(error){
+    throw new Error(error);
+}
+
+var _userErrorHandler = function(){
+    return false;
+}
+function onError(handler:(error:Error)=>boolean){
+    _errorHanlder = handler
+}
 function interceptor() {
 
 }
 export default {
     dispatch,
+    onError
 }
