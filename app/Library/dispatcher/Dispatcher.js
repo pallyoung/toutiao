@@ -49,15 +49,10 @@ function runAction(action, payload, id) {
 }
 
 function dispatch(key: string, payload: any) {
-    try {
-        var id = IDGenerator();
-        var action = Action.getAction(key);
-        runAction(action, payload, id);
-        return id;
-    } catch (e) {
-        //
-        console.error(e);
-    }
+    var id = IDGenerator();
+    var action = Action.getAction(key);
+    setTimeout(() => runAction(action, payload, id));
+    return id;
 }
 /**
  * 
@@ -111,20 +106,20 @@ function complete(state, action, id) {
     }
     Observer.next(result);
 }
-var _errorHandler = function(error){
-    if(!_userErrorHandler(error)){
+var _errorHandler = function (error) {
+    if (!_userErrorHandler(error)) {
         defaultErrorHandler(error);
     }
 };
 //默认error处理
-function defaultErrorHandler(error){
+function defaultErrorHandler(error) {
     throw new Error(error);
 }
 
-var _userErrorHandler = function(){
+var _userErrorHandler = function () {
     return false;
 }
-function onError(handler:(error:Error)=>boolean){
+function onError(handler: (error: Error) => boolean) {
     _errorHanlder = handler
 }
 function interceptor() {
