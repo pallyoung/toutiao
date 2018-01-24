@@ -18,7 +18,7 @@ import Routes from './views/routes/Routes';
 import { NativeManager } from './native';
 import {
     setStorageTool,
-    createStore,
+    injectProvider,
     createActions
 } from './Library';
 import IndexStore from './stores';
@@ -65,7 +65,7 @@ class Entry extends Component {
 
         InteractionManager.runAfterInteractions(() => {
 
-            createStore(IndexStore).then(() => {                
+            injectProvider(IndexStore).then(() => {                
                 let initialRouteName = NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
                 this.state.navigation = createNavigation(initialRouteName);
                 this.setState({ inited: true });

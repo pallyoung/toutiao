@@ -1,37 +1,28 @@
 'use strict'
 
-import StoreManager from './../store';
+'use strict'
+import util from './../util';
 
+var {
+    toValue,
+    copy,
+    isArray,
+    isObject
+} = util;
 
-function storeOrPayload(expression: string,payload) {
-
-    let store = StoreManager[expression];
-    if (store) {
-        store = store.get();
-        // if (propName) {
-        //     return (new Function('return store.' + propName)) ()
-        // } else {
-        //     return store;
-        // }
-        return store;
-
-    } else if(payload){
-        return payload;
-    }else{
-        return null;
+class Provider{
+    _value: any;
+    _name: string;
+    constructor(config){
+        this._value = config.value;
+        this._name = config.name;
+    }
+    get(){
+        return copy(this._value);
+    }
+    set(){
+        this._value = copy(value);
     }
 }
 
-function provide(expressionList,payload) {
-    let args = [];
-    if (expressionList) {
-        expressionList.forEach(function (expression) {
-            args.push(storeOrPayload(expression,payload));
-        })
-    } 
-    return args;
-}
-
-export default {
-    provide
-}
+export default Provider;

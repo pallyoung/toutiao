@@ -46,11 +46,38 @@ function toString(v){
     }
 }
 
+function then(result){
+    if(isPromise(result)){
+        return result
+    }else{
+        return Promise.resolve(result);
+    }
+}
+
+/**
+ * 获取参数列表
+ */
+function getArgumentList(func): Array {
+    var argsRegExp = /function\s*\w*\(([\s\S]*?)\)/g;
+    if (argsRegExp.test(func.toString())) {
+        /**
+         * todo:可能有bug
+         */
+        let args = [];
+        RegExp.$1.split(',').forEach((arg) => {
+            args.push(arg.replace(/\s/g, ''));
+        })
+        return args;
+    }
+    return [];
+}
 export default {
     isArray,
     isObject,
     copy,
     isPromise,
     toValue,
-    toString
+    toString,
+    then,
+    getArgumentList
 }
