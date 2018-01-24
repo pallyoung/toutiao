@@ -2,8 +2,15 @@ import createActions from './createActions';
 import getAction from './getActions';
 import runAction from './runAction';
 
-export default {
+var exports = {
     createActions,
     getAction,
-    runAction
+    exec:runAction,
+    applyMiddleWare
 }
+function applyMiddleWare(middleWare){
+    exports.exec = middleWare(exports.exec);
+}
+
+
+export default exports;

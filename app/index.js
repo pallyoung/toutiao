@@ -55,36 +55,35 @@ class Entry extends Component {
             navigation: null,
             navigationKey: 0
         }
-        
+
     }
     componentWillMount() {
-        
+
     }
     componentDidMount() {
         APPContext.Routes = Routes;
 
         InteractionManager.runAfterInteractions(() => {
 
-            injectProvider(IndexStore).then(() => {                
-                let initialRouteName = NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
-                this.state.navigation = createNavigation(initialRouteName);
-                this.setState({ inited: true });
-                InteractionManager.runAfterInteractions(() => NativeManager.hideLoadingView())
-            })
+            injectProvider(IndexStore);
+            let initialRouteName = NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
+            this.state.navigation = createNavigation(initialRouteName);
+            this.setState({ inited: true });
+            InteractionManager.runAfterInteractions(() => NativeManager.hideLoadingView())
         });
 
-    }    
+    }
     resetNavigator(initialRouteName, initialRouteParams) {
         initialRouteName = initialRouteName || NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
         this.setState({
-            inited: true, 
+            inited: true,
             navigationKey: this.state.navigationKey + 1,
-            navigation:createNavigation(initialRouteName, initialRouteParams)
+            navigation: createNavigation(initialRouteName, initialRouteParams)
         });
     }
     render() {
         var Navigation = this.state.navigation;
-        if(!this.state.inited){
+        if (!this.state.inited) {
             return null;
         }
         return <Navigation />

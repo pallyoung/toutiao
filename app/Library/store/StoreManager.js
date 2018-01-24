@@ -1,5 +1,4 @@
 'use strict'
-import Store from './Store';
 import types from './types';
 import util from './../util';
 

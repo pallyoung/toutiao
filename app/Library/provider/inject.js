@@ -15,9 +15,10 @@ function inject(configs) {
             return inject(config);
         });
     } else {
-        var name = config.name;
-        var value = config.defaultValue;
-        var provider = ProviderCreator.createProvider(config);
+        var name = configs.name;
+        var value = configs.defaultValue;
+        configs.value = value;
+        var provider = ProviderCreator.createProvider(configs);
         ProviderContainer.setProvider(name, provider);
     }
 }

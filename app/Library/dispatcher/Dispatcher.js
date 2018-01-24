@@ -1,8 +1,7 @@
 'use strict'
 import Provider from './../provider';
-import Persist from './../persist';
 import Observer from './../Observer';
-
+import Action from './../action';
 import util from './../util';
 
  
@@ -19,7 +18,7 @@ var {
 
 
 function getArgs(argumentList,payload){
-    let argumentList = getArgumentList(action.controller);
+    getArgumentList(action.controller);
     let args = [];
     /**
      * todo:需要优化
@@ -46,9 +45,9 @@ function complete(state, action) {
 }
 
 function dispatch(key: string, payload: any) {
-    var id = IDGenerator();
     var action = Action.getAction(key);
-    return runAction(action,payload);
+
+    return Action.runAction(action.controller,payload);
 }
 export default {
     dispatch,
