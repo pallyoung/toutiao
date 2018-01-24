@@ -1,11 +1,16 @@
 import action from './action';
-import dispatcher from './dispatcher';
+import Dispatcher from './dispatcher';
 import error from './error';
 import provider from './provider';
 
+var applyMiddleWare = action.applyMiddleWare;
+
+
+
 module.exports =  {
-    dispath:dispatcher.dispatch,
+    dispath:Dispatcher.dispatch,
     createActions:action.createActions,
+    applyMiddleWare,
     injectProvider:provider.inject,
     useProvider:provider.use,
     setStorageTool:function(storageTool){

@@ -24,8 +24,8 @@ function argsProvider(argumentList, payload) {
     if (argumentList) {
         return argumentList.map(function (expression) {
             let provider = ProviderContainer.getProvider(expression);
-            if (store) {
-                return store.get();
+            if (provider) {
+                return provider.get();
             } else if (payload && !isPayloadUsed) {
                 /**
                  * payload 确保只传给第一个没匹配到的
