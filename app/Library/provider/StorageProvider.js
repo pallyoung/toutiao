@@ -38,5 +38,5 @@ function setStorgaeTool(tool) {
     storageTool = tool;
 }
 
-StorageProvider.setStorgaeTool = setStorgaeTool;
+StorageProvider.setStorageTool = setStorgaeTool;
 export default StorageProvider;

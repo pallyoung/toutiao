@@ -22,5 +22,6 @@ export default {
     Provider,
     provide,
     inject,
-    use
+    use,
+    setStorageTool:StorageProvider.setStorageTool
 };
