@@ -10,7 +10,7 @@ import SingleImageItem from './SingleImageItem';
 
 class NewsItems extends Component{
     constructor(...props){
-
+        super(...props);
     }
     render(){
         var {image_list=[]} = this.props;
