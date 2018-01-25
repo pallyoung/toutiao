@@ -22,23 +22,26 @@ var {
 function argsProvider(argumentList, payload) {
     var isPayloadUsed = false;
     var args = [];
+    /**
+     * 需要优化
+    */
     if (argumentList) {
         args =  argumentList.map(function (expression) {
             let provider = ProviderContainer.getProvider(expression);
             if (provider) {
-                return provider.get();
+                return then(provider.get());
             } else if (payload && !isPayloadUsed) {
                 /**
                  * payload 确保只传给第一个没匹配到的
                  */
                 isPayloadUsed = true;
-                return payload;
+                return then(payload);
             } else {
-                return null;
+                return then(null);
             }
         })
     }
-    return args;
+    return Promise.all(args);
 
 }
 
@@ -49,14 +52,8 @@ function provide(action, payload) {
     if (typeof provider === 'function') {
         return then(provider(payload,createProvider,getProvider));
     }else{
-        try{
         var args = argsProvider(getArgumentList(controller), payload);
-        
-        console.log(args,1111)
         return then(args);
-    }catch(e){
-        console.log(e)
-    }
     }
 }
 
