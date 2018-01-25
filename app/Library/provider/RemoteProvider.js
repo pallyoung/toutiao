@@ -8,13 +8,20 @@ class RemoteProvider extends Provider{
     constructor(config){
         super(config);
         this._remote = config.remote;
-        this._method = config.method||'get';
-        this._params = config.params;
+        this.method = config.method||'get';
+        this.body = config.body;
+        this.headers = config.headers;
     }
     get(){
+        console.log(this._remote);
+        var headers = undefined;
+        if(this.headers){
+            headers = new Headers(this.headers);
+        }
         return fetch(this._remote,{
-            body:this._params,
-            method:this._method
+            body:this.body,
+            method:this.method,
+            headers
         }).then(function(response){
             return response.text().then(function(text){
                 return util.toValue(text);

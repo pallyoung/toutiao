@@ -22,5 +22,5 @@ export default {
         { "name": "养生", "tk": "news_regimen" },
         { "name": "故事", "tk": "news_story" },
         { "name": "美文", "tk": "news_essay" }
-    ]
+    ],
 }

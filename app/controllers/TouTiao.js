@@ -53,6 +53,12 @@ function removeTag(tag,tags,allTags){
 function getNewsByTag(tagKey,){
 
 }
+function meaningless(any,key){
+    if(key){
+        return {key:any}
+    }
+    return any;
+}
 
 /**
  * uuid
@@ -65,5 +71,6 @@ export default {
     getTagsClassify,
     addTag,
     removeTag,
-    uuid
+    uuid,
+    meaningless
 }
