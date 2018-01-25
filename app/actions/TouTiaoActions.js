@@ -63,6 +63,11 @@ export default [
             bodys.push(`as=${params.as}`);
             bodys.push(`cp=${params.cp}`);
             bodys.push('format=json_raw');
+            if(params.min_behot_time){
+                bodys.push(`min_behot_time=${params.min_behot_time}`);
+            }else if(params.max_behot_time){
+                bodys.push(`max_behot_time=${params.max_behot_time}`);
+            }
             return [creator({
                 name: 'news',
                 type:'remote',
