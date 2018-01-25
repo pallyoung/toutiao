@@ -49,7 +49,7 @@ function dispatch(key: string, payload: any) {
     return Provider.provide(action,payload).then(function(args){
         return Action.exec(action.controller,args);
     }).then(function(a){
-        console.log(a)
+        Observer.next(a)
     })
 }
 export default {
