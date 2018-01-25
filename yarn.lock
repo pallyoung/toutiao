@@ -2125,7 +2125,7 @@ interpret@^1.0.0:
   version "1.1.0"
   resolved "http://registry.npm.taobao.org/interpret/download/interpret-1.1.0.tgz#7ed1b1410c6a0e0f78cf95d3b8440c63f78b8614"
 
-invariant@^2.1.0, invariant@^2.2.2:
+invariant@^2.2.2:
   version "2.2.2"
   resolved "http://registry.npm.taobao.org/invariant/download/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3599,12 +3599,6 @@ react-native-alertui@^1.0.0:
 react-native-awesome-viewpager@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/react-native-awesome-viewpager/download/react-native-awesome-viewpager-1.0.0.tgz#137d8db34bf3c3518d3dd47bf972db945cbd0dce"
-
-react-native-cookies@^3.2.0:
-  version "3.2.0"
-  resolved "http://registry.npm.taobao.org/react-native-cookies/download/react-native-cookies-3.2.0.tgz#1079d4d368bb287d1c8a93f3b9b60a4bde659966"
-  dependencies:
-    invariant "^2.1.0"
 
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"

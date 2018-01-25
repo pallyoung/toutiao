@@ -1,6 +1,7 @@
 'use strict'
 
 export default {
+    url:'https://m.toutiao.com/',
     tags: [
         { "name": "推荐", "tk": "__all__" },
         { "name": "热点", "tk": "news_hot" },
