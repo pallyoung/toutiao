@@ -21,8 +21,9 @@ var {
 
 function argsProvider(argumentList, payload) {
     var isPayloadUsed = false;
+    var args = [];
     if (argumentList) {
-        return argumentList.map(function (expression) {
+        args =  argumentList.map(function (expression) {
             let provider = ProviderContainer.getProvider(expression);
             if (provider) {
                 return provider.get();
@@ -37,17 +38,25 @@ function argsProvider(argumentList, payload) {
             }
         })
     }
+    return args;
+
 }
 
 
 function provide(action, payload) {
     var provider = action.provider;
     var controller = action.controller;
-
     if (typeof provider === 'function') {
         return then(provider(payload,createProvider,getProvider));
     }else{
-        return then(argsProvider(getArgumentList(controller), payload));
+        try{
+        var args = argsProvider(getArgumentList(controller), payload);
+        
+        console.log(args,1111)
+        return then(args);
+    }catch(e){
+        console.log(e)
+    }
     }
 }
 
