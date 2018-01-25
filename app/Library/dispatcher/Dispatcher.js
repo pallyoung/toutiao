@@ -48,6 +48,8 @@ function dispatch(key: string, payload: any) {
     var action = Action.getAction(key);
     return Provider.provide(action,payload).then(function(args){
         return Action.exec(action.controller,args);
+    }).then(function(a){
+        console.log(a)
     })
 }
 export default {

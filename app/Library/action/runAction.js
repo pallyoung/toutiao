@@ -23,11 +23,11 @@ function exec(controller, args) {
 function runAction(controller, args) {
     //捕获所有异常
     try {
-       return exec(controller, args)
-        .catch(e=>errorHandle(e))
+       return exec(controller, args) 
         .then((state)=>{
-            //complete(state, action);
-        });
+            return state;
+        })
+        .catch(e=>errorHandle(e));
     } catch (e) {
         errorHandle(e);
     }

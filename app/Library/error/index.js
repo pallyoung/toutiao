@@ -4,7 +4,7 @@ var userErrorHandler = function(){
 }
 
 function defaultErrorHandler(error){
-    throw error;
+   throw error;
 }
 
 function handle(error:Error){
