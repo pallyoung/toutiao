@@ -29,5 +29,6 @@ var BuildConfig = {
     VERSION:'',
     PLATFORM: Platform.OS.toUpperCase(),
     ...config,
+    url:'https://m.toutiao.com/'
 }
 export default BuildConfig;

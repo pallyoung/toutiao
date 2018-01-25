@@ -13,30 +13,11 @@ import {
 import { Theme } from 'react-native-improver';
 var currentTheme = Theme.getTheme();
 import { StackNavigator } from 'react-navigation';
-import Storage from 'react-native-storage-tool'
 import Routes from './views/routes/Routes';
 import { NativeManager } from './native';
-import {
-    setStorageTool,
-    injectProvider,
-    createActions
-} from './Library';
-import IndexStore from './stores';
-import BuildConfig from './BuildConfig';
-import Loading from './views/components/Loading';
 import Screen from './views/components/Screen'
 
-import actions from './actions';
-createActions(actions);
-const STORE_PREFIX = 'MLUX_STORAGE_';
-setStorageTool({
-    setter(key, value) {
-        return Storage.setItem(STORE_PREFIX + key, value);
-    },
-    getter(key) {
-        return Storage.getItem(STORE_PREFIX + key);
-    }
-})
+
 function createNavigation(initialRouteName, initialRouteParams) {
     return StackNavigator(Routes, {
         initialRouteName,
@@ -63,9 +44,7 @@ class Entry extends Component {
     componentDidMount() {
         APPContext.Routes = Routes;
 
-        InteractionManager.runAfterInteractions(() => {
-
-            injectProvider(IndexStore);
+        config.run().then(() => {
             let initialRouteName = NativeManager.ENV === 'DEBUG' ? 'PageList' : 'Main';
             this.state.navigation = createNavigation(initialRouteName);
             this.setState({ inited: true });
