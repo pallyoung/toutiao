@@ -13,9 +13,7 @@ module.exports =  {
     applyMiddleWare,
     injectProvider:provider.inject,
     useProvider:provider.use,
-    setStorageTool:function(storageTool){
-        //return store.setStorageTool(storageTool);
-    },
+    setStorageTool:provider.setStorageTool,
     subscribe:function(callback){
         return Observer.subscribe(callback);
     },

@@ -15,7 +15,7 @@ import inject from './inject';
 
 var use = ProviderCreator.use;
 
-use('stroage',StorageProvider);
+use('storage',StorageProvider);
 use('remote',RemoteProvider);
 use('session',SessionProvider);
 

@@ -57,5 +57,4 @@ function provide(action, payload) {
     }
 }
 
-
 export default provide;

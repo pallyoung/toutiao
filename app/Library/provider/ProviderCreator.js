@@ -8,8 +8,8 @@ function getProviderImpl(type:String){
     if(providerImpl){
         return providerImpl
     }else{
-        creators['state'];
-    }providerImpls
+        providerImpls['state'];
+    }
 }
 
 
