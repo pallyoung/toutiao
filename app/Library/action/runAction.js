@@ -2,6 +2,7 @@
 
 import error from './../error';
 import util from './../util';
+import Provider from './../provider';
 
 var {
     then
@@ -19,15 +20,33 @@ function exec(controller, args) {
     let state = controller.apply(null, args);
     return then(state);
 }
+/**
+ * 
+ */
 
-function runAction(controller, args) {
+function complete(state, action) {
+    //改成异步
+    var changed = Provider.persist(action.persist, state);
+    let result = {
+        state,
+        changed,
+        key: action.key,
+    }
+    return result;
+}
+
+function runAction(action, payload) {
     //捕获所有异常
     try {
-       return exec(controller, args) 
-        .then((state)=>{
-            return state;
-        })
-        .catch(e=>errorHandle(e));
+        return Provider.provide(action, payload)
+            .then(function (args) {
+                var controller = action.controller;
+                return exec(controller, args)
+            })
+            .then((state) => {
+                return complete(state, action);
+            })
+            .catch(e => errorHandle(e));
     } catch (e) {
         errorHandle(e);
     }

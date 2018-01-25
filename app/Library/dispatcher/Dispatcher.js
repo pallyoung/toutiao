@@ -28,28 +28,12 @@ function getArgs(argumentList,payload){
     return args;
 }
 
-/**
- * 
- */
 
-function complete(state, action) {
-    //改成异步
-    var changed = Persist.persist(action.persist, state);
-
-    let result = {
-        state,
-        changed,
-        key: action.key,
-    }
-    Observer.next(result);
-}
 
 function dispatch(key: string, payload: any) {
     var action = Action.getAction(key);
-    return Provider.provide(action,payload).then(function(args){
-        return Action.exec(action.controller,args);
-    }).then(function(a){
-        Observer.next(a)
+    return Action.exec(action,payload).then(function(result){
+        Observer.next(result);
     })
 }
 export default {

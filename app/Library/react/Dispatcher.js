@@ -1,11 +1,19 @@
 import Dispatcher from './../dispatcher';
 import TargetSet from './TargetSet' ;
+import Action from './../action'
 
-function dispatch(action,payload){
-   let id = Dispatcher.dispatch(action,payload.payload);
-   TargetSet.set(id,payload.target);
-   return id;
+
+function middleWare(exec){
+    return function(action,payload){
+        var target = payload.target;
+        return exec(action,payload)
+            .then(function(result){
+                result.target = target;
+                return result;
+            });
+    }
 }
+Action.applyMiddleWare(middleWare)
 export default {
-    dispatch
+    dispatch:Dispatcher.dispatch
 }

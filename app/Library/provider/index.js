@@ -1,6 +1,7 @@
 'use strict'
 import Provider from './Provider';
 import provide from './provide';
+import persist from './persist';
 import ProviderCreator from './ProviderCreator';
 import ProviderContainer from './ProviderContainer';
 import RemoteProvider from './RemoteProvider';
@@ -23,5 +24,6 @@ export default {
     provide,
     inject,
     use,
+    persist,
     setStorageTool:StorageProvider.setStorageTool
 };
