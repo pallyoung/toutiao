@@ -12,7 +12,7 @@ function persist(kv,state){
             let name = kv[k];
             let provider = ProviderContainer.getProvider(name);
             if(provider){
-                store.set(v);
+                provider.set(v);
                 changed.push(name);
             }
         }      

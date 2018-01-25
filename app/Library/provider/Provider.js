@@ -20,7 +20,7 @@ class Provider{
     get(){
         return copy(this._value);
     }
-    set(){
+    set(value){
         this._value = copy(value);
     }
 }
