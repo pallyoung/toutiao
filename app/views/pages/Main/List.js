@@ -23,6 +23,7 @@ class List2 extends ScreenComponent {
         super(...props);
         this.state = {
             news: [],
+            top:null,
             min_behot_time: undefined,
             max_behot_time: undefined
         }
@@ -35,12 +36,19 @@ class List2 extends ScreenComponent {
     }
     onData(data) {
         if (data.key === AppActions.getNewsByTag && data.target === this) {
+            this._isFetching = false;
             var {
                 news,
                 min_behot_time,
                 max_behot_time,
             } = this.state;
             var news2 = data.state.news.data;
+            if(news2[0].label=='置顶'){
+                this.state.top = news2.shift();
+            }
+            if(news[0]&&news[0].label=='置顶'){
+               news.shift();
+            }
             if (min_behot_time && news2[0].min_behot_time < min_behot_time) {
                 news = news2.concat(news);
             } else {
@@ -49,6 +57,9 @@ class List2 extends ScreenComponent {
             let len = news.length;
             min_behot_time = news[0].min_behot_time;
             max_behot_time = news[len-1].max_behot_time;
+            if(this.state.top){
+                news.unshift(this.state.top);
+            } 
             this.setState({
                 news,
                 min_behot_time,
@@ -58,6 +69,10 @@ class List2 extends ScreenComponent {
         }
     }
     _fetchData(isLatest) {
+        if(this._isFetching){
+            return;
+        }
+        this._isFetching = true;
         var tk = this.props.tk;
         var payload = {
             tk: tk
@@ -93,6 +108,11 @@ class List2 extends ScreenComponent {
     _keyExtractor = (item)=>{
         return item.title;
     }
+    _onScroll=({nativeEvent:{contentOffset,layoutMeasurement,contentSize}})=>{
+        if(contentOffset.y+layoutMeasurement.height+50>contentSize.height){
+            this.fetchMore();
+        }
+    }
     render() {
         if(!this.state.init){
             return null;
@@ -102,6 +122,7 @@ class List2 extends ScreenComponent {
                 keyExtractor={this._keyExtractor}
                 style={this.props.style}
                 data={this.state.news}
+                onScroll={this._onScroll}
                 renderItem={this._renderItem} />
         );
     }

@@ -56,10 +56,6 @@ class Content extends ScreenComponent {
     componentDidMount(){
         super.componentDidMount();
     }
-    componentDidUpdate(){
-        console.log(Object.keys(this.refs))
-
-    }
     render() {
         var { tags} = this.props;
         return (
