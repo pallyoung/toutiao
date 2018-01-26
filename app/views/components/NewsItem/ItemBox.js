@@ -3,7 +3,8 @@ import React,{Component} from 'react';
 import Title from './Title';
 import {
     View,
-    StyleSheet
+    StyleSheet,
+    TouchableOpacity
 }from 'react-native';
 
 import {px2dp} from 'react-native-improver';
@@ -14,10 +15,12 @@ function ItemBox(props){
         style.push(styles.border);
     }
     return (
-        <View
+        <TouchableOpacity
+            activeOpacity={1}
+            onPress={props.onPress}
             style={style}>
             {props.children}
-        </View>
+        </TouchableOpacity>
     );
 }
 var styles = StyleSheet.create({

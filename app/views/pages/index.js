@@ -2,5 +2,6 @@
 module.exports = {
     PageList:require('./PageList').default,
     Main:require('./Main').default,
-    ChannelsManager:require('./ChannelsManager').default
+    ChannelsManager:require('./ChannelsManager').default,
+    Article:require('./Article').default
 }

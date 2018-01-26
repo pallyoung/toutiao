@@ -74,5 +74,17 @@ export default [
                 remote: 'https://m.toutiao.com/list/?'+bodys.join('&')
             }),'news'];
         }
+    },
+    {
+        key: AppActions.getArticle,
+        controller: TouTiao.meaningless, 
+        provider: function (payload, creator, getter) {
+            var remote = 'https://m.toutiao.com/i';
+            return [creator({
+                name: 'article',
+                type:'remote',
+                remote: remote+payload.id+'/info/'
+            })];
+        }
     }
 ]

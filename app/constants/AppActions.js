@@ -3,5 +3,6 @@ export default {
     getNewsByTag:'TouTiaoActions/getNewsByTag',
     getTagsClassify:'TouTiaoActions/getTagsClassify',
     removeTag:'TouTiaoActions/removeTag',
-    addTag:'TouTiaoActions/addTag'
+    addTag:'TouTiaoActions/addTag',
+    getArticle:'TouTiaoActions/getArticle',
 }

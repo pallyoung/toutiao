@@ -12,7 +12,8 @@ function SimpleItem(props){
         title
     } = props;
     return (
-        <ItemBox>
+        <ItemBox
+            onPress={props.onPress}>
             <Title 
                 title={title} />
             <Commet {...props}/>

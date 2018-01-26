@@ -14,7 +14,8 @@ function ImagesItem(props) {
         title
     } = props;
     return (
-        <ItemBox>
+        <ItemBox
+            onPress={props.onPress}>
             <Title title={title} />
             <View
                 style={{flexDirection:'row',justifyContent:'space-around',marginTop:6}}>

@@ -12,7 +12,8 @@ function SingleImageItem(props){
         title
     } = props;
     return (
-        <ItemBox>
+        <ItemBox
+            onPress={props.onPress}>
             <View style={{flexDirection:'row'}}>
                 <Title 
                     style={{flex:1,marginRight:12}}
