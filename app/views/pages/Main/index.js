@@ -38,8 +38,7 @@ class Main extends ScreenComponent {
     _onItemPress=(i)=>{
         this.refs['ContentRef']&&this.refs['ContentRef'].setPage(i);
     }
-    _onPageSelected=(e)=>{
-        var {position} = e.nativeEvent;
+    _onPageSelected=(position)=>{
         this.refs['HeaderRef']&&this.refs['HeaderRef'].setItem(position);
     }
     onData(data){

@@ -7,14 +7,13 @@ import {
 } from 'react-native';
 
 import {autoSize} from 'react-native-improver';
-
 function Title(props){
     var {
         title
     } = props;
-
     return (
-        <View>
+        <View
+            style={props.style}>
             <Text
                 style = {styles.text}>
                 {title}
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:autoSize(17),
-        color:'#aaa',
+        color:'#222',
     }
 });
 export default Title;

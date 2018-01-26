@@ -16,7 +16,6 @@ class DispatchComponent extends Component{
     _onData=(data)=>{
         var result = this.onData(data);
         if(!result && data.target==this ){
-            console.log(data.state,33333);
             this.setState(data.state);
             
         }

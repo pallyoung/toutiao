@@ -21,13 +21,17 @@ var currentTheme = Theme.getTheme();
 class Content extends ScreenComponent {
     constructor(...props) {
         super(...props);
+        this.state = {
+
+        }
     }
     
     _renderPager(tags) {
         if (tags) {
-            return tags.map((tag) => {
+            return tags.map((tag,index) => {
                 return (
                     <List 
+                        selected={index==0}
                         ref={tag.tk}
                         key={tag.tk}
                         tk={tag.tk}/>
@@ -37,17 +41,27 @@ class Content extends ScreenComponent {
             return null;
         }
     }
-    _onPageSelected=(index)=>{
+    _onPageSelected=({nativeEvent:{position}})=>{
         var { tags } = this.props;
-        var tag = tags[index];
-        this.props.onPageSelected&&this.props.onPageSelected(index);
-        //this.refs[tag.tk]&&this.refs[tag.tk].fetchLatest();
+        var tag = tags[position];
+        this.props.onPageSelected&&this.props.onPageSelected(position);
+        this.refs[tag.tk]&&this.refs[tag.tk].init();
     }
     setPage(index){
+        var { tags } = this.props;
+        var tag = tags[index];
         this.refs['ViewPagerRef']&&this.refs['ViewPagerRef'].setPage(index);
+        this.refs[tag.tk]&&this.refs[tag.tk].init();
+    }
+    componentDidMount(){
+        super.componentDidMount();
+    }
+    componentDidUpdate(){
+        console.log(Object.keys(this.refs))
+
     }
     render() {
-        var { tags } = this.props;
+        var { tags} = this.props;
         return (
             <ViewPager
                 ref='ViewPagerRef'

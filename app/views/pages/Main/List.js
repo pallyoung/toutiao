@@ -27,14 +27,20 @@ class List2 extends ScreenComponent {
             max_behot_time: undefined
         }
     }
+    componentDidMount(){
+        super.componentDidMount();
+        if(this.props.selected){
+            this.init();
+        }
+    }
     onData(data) {
         if (data.key === AppActions.getNewsByTag && data.target === this) {
             var {
                 news,
                 min_behot_time,
                 max_behot_time,
-            } = this.state.news;
-            var news2 = data.state.news;
+            } = this.state;
+            var news2 = data.state.news.data;
             if (min_behot_time && news2[0].min_behot_time < min_behot_time) {
                 news = news2.concat(news);
             } else {
@@ -52,16 +58,25 @@ class List2 extends ScreenComponent {
         }
     }
     _fetchData(isLatest) {
-        var tag = this.props.tag;
+        var tk = this.props.tk;
         var payload = {
-            tk: tag
+            tk: tk
         };
         if (isLatest) {
             payload.min_behot_time = this.state.min_behot_time;
         } else {
             payload.max_behot_time = this.state.max_behot_time;
         }
-        this.dispatch(AppActions.getNewsByTag, )
+        this.dispatch(AppActions.getNewsByTag, payload);
+    }
+    init(){
+        if(this.state.init){
+            return;
+        }else{
+            this.state.init = true;
+            this.fetchLatest();
+        }
+
     }
     fetchMore() {
         this._fetchData();
@@ -75,9 +90,16 @@ class List2 extends ScreenComponent {
                 {...item} />
         );
     }
+    _keyExtractor = (item)=>{
+        return item.title;
+    }
     render() {
+        if(!this.state.init){
+            return null;
+        }
         return (
             <List
+                keyExtractor={this._keyExtractor}
                 style={this.props.style}
                 data={this.state.news}
                 renderItem={this._renderItem} />

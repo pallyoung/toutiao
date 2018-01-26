@@ -55,7 +55,7 @@ function getNewsByTag(tagKey,){
 }
 function meaningless(any,key){
     if(key){
-        return {key:any}
+        return {[key]:any}
     }
     return any;
 }

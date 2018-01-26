@@ -17,7 +17,7 @@ class NewsItems extends Component{
         var length = image_list.length;
         if(length == 0){
             return <SimpleItem {...this.props}/>
-        }else if(length >1){
+        }else if(length >=3){
             return <ImagesItem {...this.props}/>
         }else{
             return <SingleImageItem {...this.props}/>
