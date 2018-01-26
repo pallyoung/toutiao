@@ -35,8 +35,12 @@ class Main extends ScreenComponent {
         super.componentDidMount();
         this.dispatch(AppActions.getTags)
     }
-    _onItemPress=(item)=>{
-        this.dispatch(AppActions.getNewsByTag,item);
+    _onItemPress=(i)=>{
+        this.refs['ContentRef']&&this.refs['ContentRef'].setPage(i);
+    }
+    _onPageSelected=(e)=>{
+        var {position} = e.nativeEvent;
+        this.refs['HeaderRef']&&this.refs['HeaderRef'].setItem(position);
     }
     onData(data){
         if(data.key===AppActions.addTag||data.key===AppActions.removeTag){
@@ -49,10 +53,13 @@ class Main extends ScreenComponent {
             <View
                 style = {styles.wrapper}>
                 <Header 
+                    ref='HeaderRef'
                     tags={this.state.tags}
                     onItemPress={this._onItemPress}
                     />
                 <Content 
+                    onPageSelected={this._onPageSelected}
+                    ref='ContentRef'
                     tags={this.state.tags}
                     />
 

@@ -22,13 +22,14 @@ class Content extends ScreenComponent {
     constructor(...props) {
         super(...props);
     }
+    
     _renderPager(tags) {
         if (tags) {
             return tags.map((tag) => {
                 return (
                     <List 
-                        key={tag.name}
-                        name={tag.name}
+                        ref={tag.tk}
+                        key={tag.tk}
                         tk={tag.tk}/>
                 );
             })
@@ -36,10 +37,21 @@ class Content extends ScreenComponent {
             return null;
         }
     }
+    _onPageSelected=(index)=>{
+        var { tags } = this.props;
+        var tag = tags[index];
+        this.props.onPageSelected&&this.props.onPageSelected(index);
+        //this.refs[tag.tk]&&this.refs[tag.tk].fetchLatest();
+    }
+    setPage(index){
+        this.refs['ViewPagerRef']&&this.refs['ViewPagerRef'].setPage(index);
+    }
     render() {
         var { tags } = this.props;
         return (
             <ViewPager
+                ref='ViewPagerRef'
+                onPageSelected={this._onPageSelected}
                 style = {{flex:1}}>
                 {this._renderPager(tags)}
             </ViewPager>

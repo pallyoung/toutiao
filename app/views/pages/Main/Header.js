@@ -25,13 +25,15 @@ class Header extends ScreenComponent {
         }
     }
     
-  
+    setItem(index){
+        this.setState({index});
+    }
     _onItemPress(item,index){
         if(index === this.state.index){
             return;
         }
         this.setState({index});
-        this.props.onItemPress&&this.props.onItemPress(item);
+        this.props.onItemPress&&this.props.onItemPress(index);
     }
     _renderItem() {
         var {index} = this.state;

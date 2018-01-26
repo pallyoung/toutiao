@@ -63,10 +63,10 @@ class List2 extends ScreenComponent {
         }
         this.dispatch(AppActions.getNewsByTag, )
     }
-    _fetchMore() {
+    fetchMore() {
         this._fetchData();
     }
-    _fetchLatest() {
+    fetchLatest() {
         this._fetchData(true);
     }
     _renderItem = ({ item }) => {
@@ -78,6 +78,7 @@ class List2 extends ScreenComponent {
     render() {
         return (
             <List
+                style={this.props.style}
                 data={this.state.news}
                 renderItem={this._renderItem} />
         );
