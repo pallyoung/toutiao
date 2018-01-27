@@ -12,15 +12,24 @@ import {
     ScrollView
 } from 'react-native';
 
-import { Theme } from 'react-native-improver';
+import { Theme,autoSize} from 'react-native-improver';
 
-function Title(props){
+function Title(props) {
     return (
         <View
             >
-            <Text>{props.title}</Text>
+            <Text
+                style={styles.title}>{props.title}</Text>
         </View>
     );
 }
+const styles = StyleSheet.create({
+    title:{
+        fontSize:22,
+        lineHeight:33,
+        color:'#000',
+        fontWeight:'600',
+    }
+})
 
 export default Title;
