@@ -216,10 +216,8 @@ function parseNode(node) {
                 children={node.children.map(parseNode)} />
             break;
         default:
-            if (node.children[0]) {
-                return parseNode(node.children[0])
-            } else {
-                return null;
+            if(node.children.length>0){
+                return <View key={++id} children={node.children.map(parseNode)}/>
             }
     }
     return element;
@@ -243,6 +241,7 @@ function HtmlView(props) {
         return null;
     }
     var tree = parseHtml(html);
+    console.log(tree)
     return (
         <View>
             {parseNode(tree)}
