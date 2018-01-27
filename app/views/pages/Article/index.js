@@ -55,24 +55,43 @@ class Article extends ScreenComponent {
         this.state = {
 
         }
+        this.navigationOptions = {
+            title:''
+        }
     }
     componentDidMount() {
         super.componentDidMount();
         var id = '6504120022338634254';
+        var url = ''
         try {
-            id = this.getScreen().getNavigation().state.params.id;
+            var params = this.getScreen().getNavigation().state.params;
+            id = params.id;
+            url = params.url;
+            if(url){
+                this.setState({url});
+            }else{
+                this.dispatch(AppActions.getArticle, { id })
+            }
         } catch (e) {
 
         }
-        this.dispatch(AppActions.getArticle, { id })
     }
     render() {
-        var { data } = this.state;
+        var { data,url } = this.state;
+        if(url){
+            return (
+                <WebView
+                    bounces={false}
+                    style={styles.wrapper}
+                    source={{ uri:url }} />
+            );
+        }
         if (!data) {
             return null;
         }
         return (
             <ScrollView
+                bounces={false}
                 style={styles.wrapper}>
                 <Title
                     title={data.title} />
