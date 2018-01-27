@@ -94,7 +94,6 @@ class Article extends ScreenComponent {
 const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: '#fff',
-        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         paddingHorizontal: 14,
     }
 })

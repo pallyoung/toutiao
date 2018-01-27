@@ -4,9 +4,10 @@ import React from 'react';
 import {
     View,
     Text,
-    Image
+    Image,
+    ScrollView
 } from 'react-native';
-
+import {autoSize} from 'react-native-improver';
 var i = 0;
 var text = ++i,
     tag_start = ++i,
@@ -184,16 +185,57 @@ function parseHtml(html) {
     return root;
 }
 
-
-function parseNode(node){
+var id = 1;
+function parseNode(node) {
     var element;
-    switch(node.name){
-        case 'div':
-            element = <View />
+    if (node.type === 'text') {
+        return <Text 
+                style={{color:'#000',fontSize:autoSize(17),lineHeight:27}}
+                key={++id}>{node.child}</Text>;
     }
+    switch (node.name) {
+        case 'div':
+            element = <View
+                key={++id}
+                children={node.children.map(parseNode)} />
+            break;
+        case 'p':
+            element = <View
+                key={++id}
+                style={{marginTop:8}}
+                children={node.children.map(parseNode)} />
+            break;
+        case 'img':
+            element = <Image2
+                key={++id}
+                {...node.attr} />
+            break;
+        case 'span':
+            element = <Text
+                key={++id}
+                children={node.children.map(parseNode)} />
+            break;
+        default:
+            if (node.children[0]) {
+                return parseNode(node.children[0])
+            } else {
+                return null;
+            }
+    }
+    return element;
 
 }
-function parseTree(tree){
+function Image2(props) {
+    var width = autoSize(347);
+    var height = width/props.img_width*props.img_height;
+    return (
+        <Image
+            source={{ uri: props.src }}
+            style={{width,height,marginVertical:4}}
+        />
+    );
+}
+function parseTree(tree) {
 }
 function HtmlView(props) {
     var { html } = props;
@@ -203,7 +245,7 @@ function HtmlView(props) {
     var tree = parseHtml(html);
     return (
         <View>
-
+            {parseNode(tree)}
         </View>
     );
 

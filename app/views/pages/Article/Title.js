@@ -25,6 +25,7 @@ function Title(props) {
 }
 const styles = StyleSheet.create({
     title:{
+        paddingTop: Platform.OS === 'ios' ? 20 : 0,
         fontSize:22,
         lineHeight:33,
         color:'#000',
