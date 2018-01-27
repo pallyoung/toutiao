@@ -224,7 +224,7 @@ function parseNode(node) {
 
 }
 function Image2(props) {
-    var width = autoSize(347);
+    var width = autoSize(375)-28;
     var height = width/props.img_width*props.img_height;
     return (
         <Image
@@ -241,9 +241,9 @@ function HtmlView(props) {
         return null;
     }
     var tree = parseHtml(html);
-    console.log(tree)
     return (
-        <View>
+        <View
+            style={{paddingHorizontal: 14}}>
             {parseNode(tree)}
         </View>
     );

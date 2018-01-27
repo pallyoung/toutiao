@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
         lineHeight:33,
         color:'#000',
         fontWeight:'600',
+        paddingHorizontal: 14,
     }
 })
 

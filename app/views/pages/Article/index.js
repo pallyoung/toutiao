@@ -113,7 +113,6 @@ class Article extends ScreenComponent {
 const styles = StyleSheet.create({
     wrapper: {
         backgroundColor: '#fff',
-        paddingHorizontal: 14,
     }
 })
 export default Article;
