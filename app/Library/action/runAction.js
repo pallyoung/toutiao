@@ -4,6 +4,7 @@ import error from './../error';
 import util from './../util';
 import Provider from './../provider';
 import getActions from './getActions';
+import innerActions from './innerActions';
 
 var {
     then
@@ -28,9 +29,11 @@ function exec(controller, args) {
 function complete(state, action) {
     //改成异步
     var changed = Provider.persist(action.persist, state);
+    if(changed && changed.length>0){
+        runAction(innerActions.actions,{changed});
+    }
     let result = {
         state,
-        changed,
         key: action.key,
     }
     return result;

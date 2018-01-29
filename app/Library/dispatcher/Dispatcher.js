@@ -47,7 +47,7 @@ function getDispatcher() {
     return function () {
         return dispatch.then(function(result){
             result.id = id;
-            return id;
+            return result;
         })
     }
 }

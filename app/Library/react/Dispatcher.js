@@ -13,7 +13,7 @@ function middleWare(exec){
             });
     }
 }
-// Action.applyMiddleWare(logger)
+Action.applyMiddleWare(logger)
 
 Action.applyMiddleWare(middleWare)
 
