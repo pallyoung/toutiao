@@ -1,5 +1,4 @@
 'use strict'
-import Provider from './../provider';
 import Observer from './../Observer';
 import Action from './../action';
 import util from './../util';
@@ -16,17 +15,6 @@ var {
 
 
 
-
-function getArgs(argumentList, payload) {
-    getArgumentList(action.controller);
-    let args = [];
-    /**
-     * todo:需要优化
-     * 处理成异步
-     */
-    args = Provider.provide(argumentList, payload);
-    return args;
-}
 
 
 var id = 0;
