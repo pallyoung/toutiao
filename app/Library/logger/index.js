@@ -2,9 +2,9 @@
 
 function logger(exec){
     return function(action,payload){
-        console.log(action.key+' dispatched');
+        console.log(action+' dispatched');
         return exec(action,payload).then(function(result){
-            console.log(action.key+' end',result.state);
+            console.log(action+' end',result.state);
             return result;
         })
     }

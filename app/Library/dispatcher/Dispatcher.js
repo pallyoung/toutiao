@@ -31,10 +31,18 @@ function getArgs(argumentList,payload){
 
 
 function dispatch(key: string, payload: any) {
-    var action = Action.getAction(key);
-    return Action.exec(action,payload).then(function(result){
+    return Action.exec(key,payload).then(function(result){
         Observer.next(result);
     })
+}
+var id = 0;
+function getDispatcher(){
+    return {
+        id:++id,
+        dispatch:function(){
+            var id = this.id;
+        }
+    }
 }
 export default {
     dispatch,

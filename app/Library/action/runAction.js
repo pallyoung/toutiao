@@ -3,6 +3,7 @@
 import error from './../error';
 import util from './../util';
 import Provider from './../provider';
+import getActions from './getActions';
 
 var {
     then
@@ -35,7 +36,8 @@ function complete(state, action) {
     return result;
 }
 
-function runAction(action, payload) {
+function runAction(key, payload) {
+    var action = getActions(key);
     //捕获所有异常
     try {
         return Provider.provide(action, payload)
