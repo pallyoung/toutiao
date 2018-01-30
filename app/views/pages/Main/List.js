@@ -103,6 +103,10 @@ class List2 extends ScreenComponent {
         this.getScreen().getNavigation().navigate('Article',{id:item.item_id})
     }
     _renderItem = ({ item }) => {
+        //去掉广告
+        if(item.label ==='广告'){
+            return null;
+        }
         return (
             <NewsItem
                 onPress={() => this._onItemPress(item)}
