@@ -104,7 +104,7 @@ class List2 extends ScreenComponent {
     }
     _renderItem = ({ item }) => {
         //去掉广告
-        if(item.label ==='广告'){
+        if(item&&item.label ==='广告'){
             return null;
         }
         return (
