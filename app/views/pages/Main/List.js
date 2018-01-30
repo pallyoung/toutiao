@@ -117,9 +117,9 @@ class List2 extends ScreenComponent {
             this.fetchMore();
         }
     }
-    render() {
+    render() { 
         if (!this.state.init) {
-            return null;
+            return <View style={this.props.style}/>; 
         }
         return (
             <List

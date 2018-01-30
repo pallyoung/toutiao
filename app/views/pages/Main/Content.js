@@ -25,44 +25,51 @@ class Content extends ScreenComponent {
 
         }
     }
-    
+
     _renderPager(tags) {
         if (tags) {
-            return tags.map((tag,index) => {
+            return tags.map((tag, index) => {
                 return (
-                    <List 
-                        selected={index==0}
+                    <List
+                        selected={index == 0}
                         ref={tag.tk}
                         key={tag.tk}
-                        tk={tag.tk}/>
+                        tk={tag.tk} />
                 );
             })
         } else {
             return null;
         }
     }
-    _onPageSelected=({nativeEvent:{position}})=>{
+    _onPageSelected = ({ nativeEvent: { position } }) => {
         var { tags } = this.props;
         var tag = tags[position];
-        this.props.onPageSelected&&this.props.onPageSelected(position);
-        this.refs[tag.tk]&&this.refs[tag.tk].init();
+        if (this.state.index && this.state.index !== position) {
+            return;
+        } else if (this.state.index && this.state.index === position) {
+            this.state.index = undefined;
+            return;
+        }
+        this.props.onPageSelected && this.props.onPageSelected(position);
+        this.refs[tag.tk] && this.refs[tag.tk].init();
     }
-    setPage(index){
+    setPage(index) {
         var { tags } = this.props;
         var tag = tags[index];
-        this.refs['ViewPagerRef']&&this.refs['ViewPagerRef'].setPage(index);
-        this.refs[tag.tk]&&this.refs[tag.tk].init();
+        this.state.index = index;
+        this.refs['ViewPagerRef'] && this.refs['ViewPagerRef'].setPage(index);
+        this.refs[tag.tk] && this.refs[tag.tk].init();
     }
-    componentDidMount(){
+    componentDidMount() {
         super.componentDidMount();
     }
     render() {
-        var { tags} = this.props;
+        var { tags } = this.props;
         return (
             <ViewPager
                 ref='ViewPagerRef'
                 onPageSelected={this._onPageSelected}
-                style = {{flex:1}}>
+                style={{ flex: 1 }}>
                 {this._renderPager(tags)}
             </ViewPager>
         );
