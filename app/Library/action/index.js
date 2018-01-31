@@ -3,12 +3,13 @@ import getAction from './getAction';
 import runAction from './runAction';
 import innerActions from './innerActions';
 import error from './../error';
+import Provider from './../provider';
 
 var errorHandle = error.handle;
 function complete(state, action) {
     //改成异步
     if (action.persist) {
-        exports.exec(innerActions.PROVIDER_PERSIST_ACTION, { persist: action.persist, state });
+       exec(innerActions.PROVIDER_PERSIST_ACTION,{ persist: action.persist, state });
     }
     let result = {
         state,
@@ -18,12 +19,12 @@ function complete(state, action) {
 }
 
 function exec(key, payload) {
-    var action = getActions(key);
+    var action = getAction(key);
     //捕获所有异常
     return (
         Provider.provide(action, payload)
             .then(function (args) {
-                return exec(action.controller, args)
+                return runAction(action.controller, args)
             })
             .then((state) => {
                 return complete(state, action);

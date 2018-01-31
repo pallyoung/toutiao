@@ -13,7 +13,6 @@ class RemoteProvider extends Provider{
         this.headers = config.headers;
     }
     get(){
-        console.log(this._remote);
         var headers = undefined;
         if(this.headers){
             headers = new Headers(this.headers);

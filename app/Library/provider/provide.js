@@ -31,6 +31,7 @@ function dependencyLookup(list, payload) {
             if (provider) {
                 return then(provider.get());
             } else if (payload && !isPayloadUsed) {
+
                 /**
                  * payload 确保只传给第一个没匹配到的
                  */
