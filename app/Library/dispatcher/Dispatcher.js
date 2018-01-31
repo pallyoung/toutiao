@@ -24,7 +24,7 @@ function dispatch(key: string, payload: any) {
     return Action.exec(key, payload).then(function (result) {
         result.id = APP_DISPATCHER;
         Observer.next(result);
-    })
+    });
 }
 /**
  * @warning
