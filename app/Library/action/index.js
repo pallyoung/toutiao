@@ -6,31 +6,31 @@ import error from './../error';
 import Provider from './../provider';
 
 var errorHandle = error.handle;
-function complete(state, action) {
+
+function complete(state, key) {
     //改成异步
-    if (action.persist) {
-       exec(innerActions.PROVIDER_PERSIST_ACTION,{ persist: action.persist, state });
-    }
     let result = {
         state,
-        key: action.key,
+        key,
     }
+
     return result;
+}
+function providerPersist(persist, state) {
+    if (persist) {
+        exports.exec(innerActions.PROVIDER_PERSIST_ACTION, { persist: persist, state });
+    }
+    return state;
 }
 
 function exec(key, payload) {
     var action = getAction(key);
     //捕获所有异常
-    return (
-        Provider.provide(action, payload)
-            .then(function (args) {
-                return runAction(action.controller, args)
-            })
-            .then((state) => {
-                return complete(state, action);
-            })
-            .catch(e => errorHandle(e))
-    );
+    return Provider.provide(action, payload)
+        .then(args => runAction(action.controller, args))
+        .then(state => providerPersist(action.persist, state))
+        .then(state => complete(state, action.key))
+        .catch(e => errorHandle(e));
 }
 
 function applyMiddleWare(middleWare) {
