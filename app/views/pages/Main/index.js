@@ -16,6 +16,7 @@ import { Theme } from 'react-native-improver';
 import AppActions from './../../../constants/AppActions'
 import Header from './Header';
 import Content from './Content';
+import Library from './../../../Library'
 import {ViewPager} from 'react-native-awesome-viewpager';
 
 var currentTheme = Theme.getTheme();
@@ -42,7 +43,8 @@ class Main extends ScreenComponent {
         this.refs['HeaderRef']&&this.refs['HeaderRef'].setItem(position);
     }
     onData(data){
-        if(data.key===AppActions.addTag||data.key===AppActions.removeTag){
+        console.log(data.key,222)
+        if(data.key===Library.PROVIDER_CHANGE_ACTION){
             this.dispatch(AppActions.getTags)
             return true;
         }

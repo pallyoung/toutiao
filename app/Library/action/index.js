@@ -4,37 +4,58 @@ import runAction from './runAction';
 import innerActions from './innerActions';
 import error from './../error';
 import Provider from './../provider';
+import Observer from './../Observer';
+
 
 var errorHandle = error.handle;
 
-function complete(state, key) {
-    //改成异步
-    let result = {
-        state,
-        key,
-    }
-
-    return result;
+var run = function (action, payload) {
+    return Provider.provide(action, payload)
+        .then(args => runAction(action.controller, args))
+        .then(state => setResult(state, action.key))
 }
+
+var id = 0;
+
+function IDGenerator() {
+    return ++id;
+}
+
 function providerPersist(persist, state) {
     if (persist) {
-        exports.exec(innerActions.PROVIDER_PERSIST_ACTION, { persist: persist, state });
+        exec(innerActions.PROVIDER_PERSIST_ACTION, { persist: persist, state });
     }
     return state;
 }
 
+
+function setResult(state, key) {
+    let result = {
+        state,
+        key,
+    }
+    return result;
+}
+
+function pushToObserver(result) {
+    Observer.next(result);
+    return result;
+}
 function exec(key, payload) {
     var action = getAction(key);
+    var id = IDGenerator();
+
     //捕获所有异常
-    return Provider.provide(action, payload)
-        .then(args => runAction(action.controller, args))
-        .then(state => providerPersist(action.persist, state))
-        .then(state => complete(state, action.key))
-        .catch(e => errorHandle(e));
+    run(action, payload)
+        .then(result => pushToObserver(result))
+        .then((result) => providerPersist(action.persist, result.state))
+        .catch(e => errorHandle(e))
+
+    return id;
 }
 
 function applyMiddleWare(middleWare) {
-    exports.exec = middleWare(exports.exec);
+    run = middleWare(run);
 }
 
 

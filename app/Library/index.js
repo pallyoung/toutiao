@@ -6,7 +6,6 @@ import provider from './provider';
 var applyMiddleWare = action.applyMiddleWare;
 
 
-
 module.exports =  {
     dispath:Dispatcher.dispatch,
     createActions:action.createActions,
@@ -20,5 +19,12 @@ module.exports =  {
     unsubscribe:function(callback){
         return Observer.unsubscribe(callback);
     },
-    onError:error.onError
+    onError:error.onError,
+
+    /**
+     * @constants
+    */
+    PROVIDER_CHANGE_ACTION:action.PROVIDER_CHANGE_ACTION,
+
+
 }
