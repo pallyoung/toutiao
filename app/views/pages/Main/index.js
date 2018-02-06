@@ -43,10 +43,13 @@ class Main extends ScreenComponent {
         this.refs['HeaderRef']&&this.refs['HeaderRef'].setItem(position);
     }
     onData(data){
-        console.log(data.key,222)
-        if(data.key===Library.PROVIDER_CHANGE_ACTION){
-            this.dispatch(AppActions.getTags)
-            return true;
+        switch(data.key){
+            case Library.PROVIDER_PERSIST_ACTION:
+                if(data.state.tags){
+                    this.dispatch(AppActions.getTags)
+                    return true;
+                }
+            
         }
     }
     render() {

@@ -64,7 +64,7 @@ var exports = {
     getAction,
     exec: exec,
     applyMiddleWare,
-    PROVIDER_CHANGE_ACTION: innerActions.PROVIDER_CHANGE_ACTION
+    PROVIDER_PERSIST_ACTION: innerActions.PROVIDER_PERSIST_ACTION
 }
 createActions(innerActions.actions);
 

@@ -24,7 +24,7 @@ module.exports =  {
     /**
      * @constants
     */
-    PROVIDER_CHANGE_ACTION:action.PROVIDER_CHANGE_ACTION,
+    PROVIDER_PERSIST_ACTION:action.PROVIDER_PERSIST_ACTION,
 
 
 }
