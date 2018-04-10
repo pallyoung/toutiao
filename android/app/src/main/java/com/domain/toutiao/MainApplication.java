@@ -3,7 +3,7 @@ package com.domain.toutiao;
 import android.app.Application;
 
 import com.domain.rnpackage.RNPackage;
-import com.facebook.toutiao.BuildConfig;
+import com.domain.toutiao.BuildConfig;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
